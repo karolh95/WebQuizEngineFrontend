@@ -7,6 +7,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button'
 import { HomeModule } from '@components/home/home.module';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { BasicAuthInterceptor } from '@interceptors/basic-auth.interceptor';
+import { ErrorInterceptor } from '@interceptors/error.interceptor';
+import { LoginModule } from '@components/login/login.module';
 
 @NgModule({
   declarations: [
@@ -17,10 +21,15 @@ import { HomeModule } from '@components/home/home.module';
     AppRoutingModule,
 	BrowserAnimationsModule,
 	HomeModule,
+	LoginModule,
 	MatToolbarModule,
-	MatButtonModule
+	MatButtonModule,
+	HttpClientModule
   ],
-  providers: [],
+  providers: [
+	  { provide: HTTP_INTERCEPTORS, useClass: BasicAuthInterceptor, multi: true },
+	  { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

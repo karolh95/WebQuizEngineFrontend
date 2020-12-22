@@ -8,6 +8,21 @@
 			Home
 		</button>
 
+        <ng-container *ngIf="user; then logoutButton; else loginButton">
+        </ng-container>
+
+        <ng-template #loginButton>
+            <button mat-flat-button color="primary" [routerLink]="['login']">
+				Login
+			</button>
+        </ng-template>
+
+        <ng-template #logoutButton>
+            <button mat-flat-button color="primary" (click)="logout()">
+				Logout
+			</button>
+        </ng-template>
+
     </mat-toolbar-row>
 </mat-toolbar>
 <router-outlet></router-outlet>
