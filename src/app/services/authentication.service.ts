@@ -14,11 +14,19 @@ export class AuthenticationService {
 	private userSubject: BehaviorSubject<User>;
 	public user: Observable<User>;
 
+	private get storedUser(): User {
+		return JSON.parse(localStorage.getItem("user"));
+	}
+
+	private set storedUser(user: User) {
+		localStorage.setItem("user", JSON.stringify(user));
+	}
+
 	constructor(
 		private router: Router,
 		private http: HttpClient
 	) {
-		this.userSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('user')));
+		this.userSubject = new BehaviorSubject<User>(this.storedUser);
 		this.user = this.userSubject.asObservable();
 	}
 
@@ -28,40 +36,30 @@ export class AuthenticationService {
 
 	login(email: string, password: string) {
 		const token = btoa(email + ':' + password);
-		return this.http.get<any>(`${environment.api}/login`,
-			{
-				headers: {
-					Authorization: `Basic ${token}`
-				}
-			})
-			.pipe(map(user => {
-				user.authData = token;
-				localStorage.setItem('user', JSON.stringify(user));
-				this.userSubject.next(user);
-				console.log(user);
-
-				return user;
-			}));
+		const options = { headers: { Authorization: `Basic ${token}` } };
+		return this.http.get<any>(`${environment.api}/login`, options)
+			.pipe(map(this.storeUser()));
 	}
 
 	register(email: string, password: string) {
-		return this.http.post<User>(`${environment.api}/register`,
-			{
-				"email": email,
-				"password": password
-			}).pipe(map(user => {
-				user.authData = btoa(email + ':' + password);
-				localStorage.setItem('user', JSON.stringify(user));
-				this.userSubject.next(user);
-				console.log(user);
-
-				return user;
-			}))
+		const body = { email, password };
+		return this.http.post<User>(`${environment.api}/register`, body)
+			.pipe(map(this.storeUser()))
 	}
 
 	logout() {
 		localStorage.removeItem('user');
 		this.userSubject.next(null);
 		this.router.navigate(['/login']);
+	}
+
+	private storeUser() {
+		return (user: User): User => {
+			user.authData = btoa(user.email + ':' + user.authData)
+			this.storedUser = user;
+			this.userSubject.next(user);
+
+			return user;
+		}
 	}
 }
