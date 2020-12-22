@@ -3,17 +3,18 @@ import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from '@components/home/home.component';
 import { LoginComponent } from '@components/login/login.component';
 import { RegisterComponent } from '@components/register/register.component';
+import { UnauthenticatedGuard } from '@guards/unauthenticated.guard';
 
 
 const routes: Routes = [
-	{ path:'', component:HomeComponent },
-	{ path: 'login', component: LoginComponent },
-	{ path: 'register', component: RegisterComponent },
-	{ path:'**', redirectTo:'' }
+	{ path: '', component: HomeComponent },
+	{ path: 'login', component: LoginComponent, canActivate: [UnauthenticatedGuard] },
+	{ path: 'register', component: RegisterComponent, canActivate: [UnauthenticatedGuard] },
+	{ path: '**', redirectTo: '' }
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+	imports: [RouterModule.forRoot(routes)],
+	exports: [RouterModule]
 })
 export class AppRoutingModule { }
