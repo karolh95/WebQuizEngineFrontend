@@ -11,6 +11,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BasicAuthInterceptor } from '@interceptors/basic-auth.interceptor';
 import { ErrorInterceptor } from '@interceptors/error.interceptor';
 import { LoginModule } from '@components/login/login.module';
+import { RegisterModule } from '@components/register/register.module';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { LoginModule } from '@components/login/login.module';
 	BrowserAnimationsModule,
 	HomeModule,
 	LoginModule,
+	RegisterModule,
 	MatToolbarModule,
 	MatButtonModule,
 	HttpClientModule

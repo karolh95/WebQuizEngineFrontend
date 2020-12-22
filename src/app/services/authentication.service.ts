@@ -7,46 +7,61 @@ import { map } from 'rxjs/operators';
 import { environment } from '@env/environment';
 
 @Injectable({
-  providedIn: 'root'
+	providedIn: 'root'
 })
 export class AuthenticationService {
 
 	private userSubject: BehaviorSubject<User>;
 	public user: Observable<User>;
 
-  constructor(
-	  private router: Router,
-	  private http: HttpClient
-  ) {
-	  this.userSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('user')));
-	  this.user = this.userSubject.asObservable();
-   }
+	constructor(
+		private router: Router,
+		private http: HttpClient
+	) {
+		this.userSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('user')));
+		this.user = this.userSubject.asObservable();
+	}
 
-   public get userValue(): User {
-	   return this.userSubject.value;
-   }
+	public get userValue(): User {
+		return this.userSubject.value;
+	}
 
-   login(email: string, password: string){
-	   const token = btoa(email+':'+password);
-	   return this.http.get<any>(`${environment.api}/login`,
-	    {
-			headers:{
-				Authorization: `Basic ${token}`
-			}
-		})
-	   		.pipe(map(user=>{
-				   user.authData = token;
-				   localStorage.setItem('user', JSON.stringify(user));
-				   this.userSubject.next(user);
-				   console.log(user);
-				   
-				   return user;
-			   }));
-   }
+	login(email: string, password: string) {
+		const token = btoa(email + ':' + password);
+		return this.http.get<any>(`${environment.api}/login`,
+			{
+				headers: {
+					Authorization: `Basic ${token}`
+				}
+			})
+			.pipe(map(user => {
+				user.authData = token;
+				localStorage.setItem('user', JSON.stringify(user));
+				this.userSubject.next(user);
+				console.log(user);
 
-   logout() {
-	   localStorage.removeItem('user');
-	   this.userSubject.next(null);
-	   this.router.navigate(['/login']);
-   }
+				return user;
+			}));
+	}
+
+	register(email: string, password: string) {
+		return this.http.post<User>(`${environment.api}/register`,
+			{
+				"email": email,
+				"password": password
+			}).pipe(map(user => {
+				user.authData = btoa(email + ':' + password);
+				localStorage.setItem('user', JSON.stringify(user));
+				this.userSubject.next(user);
+				console.log(user);
+
+				return user;
+			}))
+	}
+
+	logout() {
+		localStorage.removeItem('user');
+		this.userSubject.next(null);
+		this.router.navigate(['/login']);
+	}
 }
