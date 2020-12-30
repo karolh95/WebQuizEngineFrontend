@@ -25,6 +25,11 @@
 </ng-template>
 
 <ng-template #authenticated>
+
+    <button mat-flat-button color="primary" [routerLink]="['quizzes']">
+		Quizzes
+	</button>
+
     <button mat-flat-button color="primary" (click)="logout()">
 		Logout
 	</button>
