@@ -15,13 +15,16 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatTableModule } from '@angular/material/table';
 import { DialogComponent } from './create-quiz/dialog/dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { QuizListComponent } from './quiz-list/quiz-list.component';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 @NgModule({
 	declarations: [
 		QuizzesComponent,
 		HomeQuizComponent,
 		CreateQuizComponent,
-		DialogComponent
+		DialogComponent,
+		QuizListComponent
 	],
 	imports: [
 		CommonModule,
@@ -36,7 +39,8 @@ import { MatDialogModule } from '@angular/material/dialog';
 		MatButtonModule,
 		MatCheckboxModule,
 		MatTableModule,
-		MatDialogModule
+		MatDialogModule,
+		MatPaginatorModule
 	]
 })
 export class QuizzesModule { }
