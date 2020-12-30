@@ -35,16 +35,17 @@ export class AuthenticationService {
 	}
 
 	login(email: string, password: string) {
-		const token = btoa(email + ':' + password);
+		const token = this.getToken(email, password);
 		const options = { headers: { Authorization: `Basic ${token}` } };
 		return this.http.get<any>(`${environment.api}/login`, options)
-			.pipe(map(this.storeUser()));
+			.pipe(map(this.storeUser(token)));
 	}
 
 	register(email: string, password: string) {
+		const token = this.getToken(email, password);
 		const body = { email, password };
 		return this.http.post<User>(`${environment.api}/register`, body)
-			.pipe(map(this.storeUser()))
+			.pipe(map(this.storeUser(token)))
 	}
 
 	logout() {
@@ -53,9 +54,13 @@ export class AuthenticationService {
 		this.router.navigate(['/login']);
 	}
 
-	private storeUser() {
+	private getToken(username: string, password: string): string {
+		return btoa(username + ':' + password);
+	}
+
+	private storeUser(token: string) {
 		return (user: User): User => {
-			user.authData = btoa(user.email + ':' + user.authData)
+			user.authData = token
 			this.storedUser = user;
 			this.userSubject.next(user);
 
