@@ -1,8 +1,8 @@
 export class Quiz {
 
-	id: number;
+	id?: number;
 	title: string;
 	text: string;
 	options: string[];
-	answer: number[];
+	answer?: number[];
 }
