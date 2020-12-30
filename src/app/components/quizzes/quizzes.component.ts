@@ -7,7 +7,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class QuizzesComponent implements OnInit {
 
-	links: Link[] = [];
+	links: Link[] = [
+		{ title: 'Create Quiz', url: 'create' }
+	];
 
 	constructor() { }
 

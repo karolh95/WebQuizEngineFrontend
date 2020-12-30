@@ -7,6 +7,12 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { HomeQuizComponent } from './home-quiz/home-quiz.component'
 import { CreateQuizComponent } from './create-quiz/create-quiz.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatButtonModule } from '@angular/material/button';
+import { MatInputModule } from '@angular/material/input';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatTableModule } from '@angular/material/table';
 
 @NgModule({
 	declarations: [
@@ -19,7 +25,14 @@ import { CreateQuizComponent } from './create-quiz/create-quiz.component';
 		QuizzesRoutingModule,
 		MatCardModule,
 		MatSidenavModule,
-		MatListModule
+		MatListModule,
+		ReactiveFormsModule,
+		FormsModule,
+		MatFormFieldModule,
+		MatInputModule,
+		MatButtonModule,
+		MatCheckboxModule,
+		MatTableModule
 	]
 })
 export class QuizzesModule { }
