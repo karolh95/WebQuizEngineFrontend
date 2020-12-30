@@ -13,12 +13,15 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatTableModule } from '@angular/material/table';
+import { DialogComponent } from './create-quiz/dialog/dialog.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
 	declarations: [
 		QuizzesComponent,
 		HomeQuizComponent,
-		CreateQuizComponent
+		CreateQuizComponent,
+		DialogComponent
 	],
 	imports: [
 		CommonModule,
@@ -32,7 +35,8 @@ import { MatTableModule } from '@angular/material/table';
 		MatInputModule,
 		MatButtonModule,
 		MatCheckboxModule,
-		MatTableModule
+		MatTableModule,
+		MatDialogModule
 	]
 })
 export class QuizzesModule { }

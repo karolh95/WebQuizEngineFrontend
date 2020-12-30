@@ -1,9 +1,11 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit, Optional } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { Quiz } from '@models/quiz';
 import { QuizzesService } from '@services/quizzes.service';
+import { DialogComponent } from './dialog/dialog.component';
 
 @Component({
 	selector: 'app-create-quiz',
@@ -13,14 +15,15 @@ import { QuizzesService } from '@services/quizzes.service';
 export class CreateQuizComponent implements OnInit {
 
 	displayedColumns: string[] = ['text', 'isCorrect', 'removeButton'];
-	options: Option[] = [];
-	dataSource = new MatTableDataSource<Option>(this.options);
+	options: Option[];
+	dataSource: MatTableDataSource<Option>;
 	formGroup: FormGroup;
 	errors: { defaultMessage: string }[];
 
 	constructor(
 		private builder: FormBuilder,
-		private quizzesService: QuizzesService
+		private quizzesService: QuizzesService,
+		private dialog: MatDialog
 	) { }
 
 	ngOnInit(): void {
@@ -29,6 +32,8 @@ export class CreateQuizComponent implements OnInit {
 			title: [''],
 			text: [''],
 		});
+		this.options = [];
+		this.dataSource = new MatTableDataSource<Option>(this.options);
 	}
 
 	onSubmit() {
@@ -49,13 +54,16 @@ export class CreateQuizComponent implements OnInit {
 			}
 		}
 
-		const f = (quiz: Quiz) => console.log(quiz);
-		const e = (e: HttpErrorResponse) => {
+		const next = (quiz: Quiz) => {
+			this.dialog.open(DialogComponent, { data: quiz })
+			this.ngOnInit();
+		};
+		const error = (e: HttpErrorResponse) => {
 			this.errors = e.error.errors;
 		}
 		this.quizzesService
 			.save(quiz)
-			.subscribe(f, e);
+			.subscribe(next, error);
 	}
 
 	addOption() {
