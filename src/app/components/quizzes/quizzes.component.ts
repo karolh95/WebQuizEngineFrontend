@@ -10,7 +10,8 @@ export class QuizzesComponent implements OnInit {
 	links: Link[] = [
 		{ title: 'Create Quiz', url: 'create' },
 		{ title: 'All Quizzes', url: 'all' },
-		{ title: 'Solved Quizzes', url: 'solved' }
+		{ title: 'Solved Quizzes', url: 'solved' },
+		{ title: 'My Quizzes', url: 'my' }
 	];
 
 	constructor() { }

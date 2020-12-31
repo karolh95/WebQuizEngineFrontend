@@ -5,6 +5,7 @@ import { HomeQuizComponent } from "./home-quiz/home-quiz.component";
 import { AllQuizzesComponent } from "./quiz-list/all-quizzes.component";
 import { QuizzesComponent } from "./quizzes.component";
 import { SolvedQuizzesComponent } from "./quiz-list/solved-quizzes.component";
+import { MyQuizzesComponent } from "./quiz-list/my-quizzes.component";
 
 const routes: Routes = [
 	{
@@ -13,7 +14,8 @@ const routes: Routes = [
 			{ path: '', component: HomeQuizComponent },
 			{ path: 'create', component: CreateQuizComponent },
 			{ path: 'all', component: AllQuizzesComponent },
-			{ path: 'solved', component: SolvedQuizzesComponent }
+			{ path: 'solved', component: SolvedQuizzesComponent },
+			{ path: 'my', component: MyQuizzesComponent }
 		]
 	}
 ];

@@ -20,6 +20,7 @@ import { QuizDialogComponent } from './quiz-dialog/quiz-dialog.component';
 import { SolvedQuizzesComponent } from './quiz-list/solved-quizzes.component';
 import { AllQuizzesComponent } from './quiz-list/all-quizzes.component';
 import { QuizListComponent } from './quiz-list/quiz-list.component';
+import { MyQuizzesComponent } from './quiz-list/my-quizzes.component';
 
 @NgModule({
 	declarations: [
@@ -30,7 +31,8 @@ import { QuizListComponent } from './quiz-list/quiz-list.component';
 		AllQuizzesComponent,
 		QuizDialogComponent,
 		SolvedQuizzesComponent,
-		QuizListComponent
+		QuizListComponent,
+		MyQuizzesComponent
 	],
 	imports: [
 		CommonModule,
