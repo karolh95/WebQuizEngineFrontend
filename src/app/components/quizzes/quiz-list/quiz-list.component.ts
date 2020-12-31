@@ -10,10 +10,12 @@ import { tap } from 'rxjs/operators';
 })
 export class QuizListComponent implements OnInit, AfterViewInit {
 
-	@Input() displayedColumns: string[];
+	@Input() displayedColumns: Columns[];
 	@Input() dataSource: CustomDataSource<any>;
 	@Input() actions: Action<any>[];
 	@ViewChild(MatPaginator) paginator: MatPaginator;
+
+	columns = Columns;
 
 	constructor() { }
 
@@ -37,4 +39,12 @@ export class QuizListComponent implements OnInit, AfterViewInit {
 export interface Action<T> {
 	title: string;
 	execute: (item: T) => void;
+}
+
+export enum Columns {
+	ID = 'id',
+	TITLE = 'title',
+	TEXT = 'text',
+	COMPLETED_AT = 'completedAt',
+	ACTIONS = 'actions'
 }

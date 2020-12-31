@@ -5,7 +5,7 @@ import { Quiz } from '@models/quiz';
 import { QuizzesDataSource } from '@models/quizzes-data-source';
 import { QuizzesService } from '@services/quizzes.service';
 import { QuizDialogComponent } from '../quiz-dialog/quiz-dialog.component';
-import { Action } from './quiz-list.component';
+import { Action, Columns } from './quiz-list.component';
 
 @Component({
 	selector: 'app-all-quizzes',
@@ -13,7 +13,7 @@ import { Action } from './quiz-list.component';
 })
 export class AllQuizzesComponent implements OnInit {
 
-	displayedColumns: string[];
+	displayedColumns: Columns[];
 	dataSource: CustomDataSource<Quiz>;
 	actions: Action<Quiz>[];
 
@@ -21,7 +21,7 @@ export class AllQuizzesComponent implements OnInit {
 		private quizzesService: QuizzesService,
 		private dialog: MatDialog
 	) {
-		this.displayedColumns = ['id', 'title', 'text', 'actions'];
+		this.displayedColumns = [Columns.ID, Columns.TITLE, Columns.TEXT, Columns.ACTIONS];
 		this.dataSource = new QuizzesDataSource(this.quizzesService);
 		this.actions = [
 			{
