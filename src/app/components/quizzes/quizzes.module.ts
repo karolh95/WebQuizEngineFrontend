@@ -17,6 +17,7 @@ import { DialogComponent } from './create-quiz/dialog/dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { QuizListComponent } from './quiz-list/quiz-list.component';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { QuizDialogComponent } from './quiz-dialog/quiz-dialog.component';
 
 @NgModule({
 	declarations: [
@@ -24,7 +25,8 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 		HomeQuizComponent,
 		CreateQuizComponent,
 		DialogComponent,
-		QuizListComponent
+		QuizListComponent,
+		QuizDialogComponent
 	],
 	imports: [
 		CommonModule,

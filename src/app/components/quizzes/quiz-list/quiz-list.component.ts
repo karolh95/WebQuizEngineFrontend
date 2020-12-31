@@ -1,9 +1,11 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { Quiz } from '@models/quiz';
 import { QuizDataSource } from '@models/quiz-data-source';
 import { QuizzesService } from '@services/quizzes.service';
 import { tap } from 'rxjs/operators';
+import { QuizDialogComponent } from '../quiz-dialog/quiz-dialog.component';
 
 @Component({
 	selector: 'app-quiz-list',
@@ -16,7 +18,10 @@ export class QuizListComponent implements OnInit, AfterViewInit {
 	dataSource: QuizDataSource;
 	@ViewChild(MatPaginator) paginator: MatPaginator;
 
-	constructor(private quizzesService: QuizzesService) { }
+	constructor(
+		private quizzesService: QuizzesService,
+		private dialog: MatDialog
+	) { }
 
 	ngOnInit(): void {
 		this.dataSource = new QuizDataSource(this.quizzesService);
@@ -37,6 +42,6 @@ export class QuizListComponent implements OnInit, AfterViewInit {
 	}
 
 	show(quiz: Quiz) {
-		console.log(quiz);
+		this.dialog.open(QuizDialogComponent, { data: quiz });
 	}
 }

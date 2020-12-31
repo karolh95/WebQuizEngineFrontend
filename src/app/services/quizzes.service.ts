@@ -21,6 +21,17 @@ export class QuizzesService {
 		const params = request;
 		return this.http.get<Page<Quiz>>(`${environment.api}/quizzes`, { params });
 	}
+
+	solve(quiz: Quiz): Observable<Answer> {
+		const id = quiz.id;
+		const body = { answer: quiz.answer };
+		return this.http.post<Answer>(`${environment.api}/quizzes/${id}/solve`, body);
+	}
+}
+
+export interface Answer {
+	success: boolean;
+	feedback: string;
 }
 
 export interface Page<T> {

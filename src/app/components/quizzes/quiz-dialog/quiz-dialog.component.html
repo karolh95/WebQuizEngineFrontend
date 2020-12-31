@@ -1,0 +1,17 @@
+<h2 mat-dialog-title>{{quiz.title}}</h2>
+<mat-dialog-content>
+    <p><b>{{quiz.text}}</b></p>
+    <ul>
+        <li *ngFor="let option of quiz.options; let i = index">
+            <mat-checkbox [(ngModel)]="userAnswer[i]">
+                {{option}}
+            </mat-checkbox>
+        </li>
+    </ul>
+    <span>{{feedback}}</span>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+    <button mat-button mat-dialog-close>Back</button>
+    <button mat-raised-button (click)="solve()" [disabled]="disabled" color="primary">Solve</button>
+</mat-dialog-actions>
