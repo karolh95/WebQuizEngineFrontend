@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { HomeMessagesService, Message } from '@services/home-messages.service';
 
 @Component({
 	selector: 'app-home',
@@ -9,36 +10,14 @@ export class HomeComponent implements OnInit {
 
 	messages: Message[];
 
-	constructor() { }
+	constructor(
+		private messagesService: HomeMessagesService
+	) { }
 
 	ngOnInit(): void {
 
-		this.messages = [
-			{
-				title: 'Login & Registration',
-				date: new Date("2020-12-30"),
-				text: [
-					'Hi!',
-					'Login and Registration forms are now available!',
-					'Next station: Quiz Creation!'
-				]
-			},
-			{
-				title: 'Web Quiz is Offline',
-				date: new Date("2020-12-21"),
-				text: [
-					'Hello, there!',
-					'Web Quiz is under construction right now. It will be available soon!',
-					'Keep waiting!'
-				]
-			}
-		];
+		this.messagesService.getMessages()
+			.subscribe(messages => this.messages = messages);
 	}
 
-}
-
-interface Message {
-	title: string;
-	date: Date,
-	text: string[];
 }
