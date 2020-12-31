@@ -4,7 +4,7 @@ import { CreateQuizComponent } from "./create-quiz/create-quiz.component";
 import { HomeQuizComponent } from "./home-quiz/home-quiz.component";
 import { QuizListComponent } from "./quiz-list/quiz-list.component";
 import { QuizzesComponent } from "./quizzes.component";
-import { SolvedQuizzesComponent } from "./solved-quizzes/solved-quizzes.component";
+import { SolvedQuizzesComponent } from "./quiz-list/solved-quizzes.component";
 
 const routes: Routes = [
 	{

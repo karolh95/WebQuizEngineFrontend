@@ -18,7 +18,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { QuizListComponent } from './quiz-list/quiz-list.component';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { QuizDialogComponent } from './quiz-dialog/quiz-dialog.component';
-import { SolvedQuizzesComponent } from './solved-quizzes/solved-quizzes.component';
+import { SolvedQuizzesComponent } from './quiz-list/solved-quizzes.component';
 
 @NgModule({
 	declarations: [
