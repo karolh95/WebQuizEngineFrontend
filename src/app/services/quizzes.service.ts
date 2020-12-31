@@ -17,6 +17,10 @@ export class QuizzesService {
 		return this.http.post<Quiz>(`${environment.api}/quizzes`, quiz);
 	}
 
+	getById(id: number): Observable<Quiz> {
+		return this.http.get<Quiz>(`${environment.api}/quizzes/${id}`);
+	}
+
 	get(request): Observable<Page<Quiz>> {
 		const params = request;
 		return this.http.get<Page<Quiz>>(`${environment.api}/quizzes`, { params });
