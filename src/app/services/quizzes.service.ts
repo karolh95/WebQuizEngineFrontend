@@ -27,11 +27,21 @@ export class QuizzesService {
 		const body = { answer: quiz.answer };
 		return this.http.post<Answer>(`${environment.api}/quizzes/${id}/solve`, body);
 	}
+
+	getCompleted(request): Observable<Page<CompletedQuiz>> {
+		const params = request;
+		return this.http.get<Page<CompletedQuiz>>(`${environment.api}/quizzes/completed`, { params });
+	}
 }
 
 export interface Answer {
 	success: boolean;
 	feedback: string;
+}
+
+export interface CompletedQuiz {
+	id: number;
+	completedAt: Date;
 }
 
 export interface Page<T> {
