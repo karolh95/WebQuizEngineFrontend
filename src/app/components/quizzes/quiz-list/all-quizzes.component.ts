@@ -9,11 +9,11 @@ import { tap } from 'rxjs/operators';
 import { QuizDialogComponent } from '../quiz-dialog/quiz-dialog.component';
 
 @Component({
-	selector: 'app-quiz-list',
-	templateUrl: './quiz-list.component.html',
-	styleUrls: ['./quiz-list.component.css']
+	selector: 'app-all-quizzes',
+	templateUrl: './all-quizzes.component.html',
+	styleUrls: ['./all-quizzes.component.css']
 })
-export class QuizListComponent implements OnInit, AfterViewInit {
+export class AllQuizzesComponent implements OnInit, AfterViewInit {
 
 	displayedColumns: string[] = ['id', 'title', 'text', 'action'];
 	dataSource: CustomDataSource<Quiz>;

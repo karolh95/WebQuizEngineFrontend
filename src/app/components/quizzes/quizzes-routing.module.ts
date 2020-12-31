@@ -2,7 +2,7 @@ import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
 import { CreateQuizComponent } from "./create-quiz/create-quiz.component";
 import { HomeQuizComponent } from "./home-quiz/home-quiz.component";
-import { QuizListComponent } from "./quiz-list/quiz-list.component";
+import { AllQuizzesComponent } from "./quiz-list/all-quizzes.component";
 import { QuizzesComponent } from "./quizzes.component";
 import { SolvedQuizzesComponent } from "./quiz-list/solved-quizzes.component";
 
@@ -12,7 +12,7 @@ const routes: Routes = [
 		children: [
 			{ path: '', component: HomeQuizComponent },
 			{ path: 'create', component: CreateQuizComponent },
-			{ path: 'all', component: QuizListComponent },
+			{ path: 'all', component: AllQuizzesComponent },
 			{ path: 'solved', component: SolvedQuizzesComponent }
 		]
 	}

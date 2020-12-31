@@ -15,10 +15,10 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatTableModule } from '@angular/material/table';
 import { DialogComponent } from './create-quiz/dialog/dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
-import { QuizListComponent } from './quiz-list/quiz-list.component';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { QuizDialogComponent } from './quiz-dialog/quiz-dialog.component';
 import { SolvedQuizzesComponent } from './quiz-list/solved-quizzes.component';
+import { AllQuizzesComponent } from './quiz-list/all-quizzes.component';
 
 @NgModule({
 	declarations: [
@@ -26,7 +26,7 @@ import { SolvedQuizzesComponent } from './quiz-list/solved-quizzes.component';
 		HomeQuizComponent,
 		CreateQuizComponent,
 		DialogComponent,
-		QuizListComponent,
+		AllQuizzesComponent,
 		QuizDialogComponent,
 		SolvedQuizzesComponent
 	],
