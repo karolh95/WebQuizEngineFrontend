@@ -1,48 +1,39 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { MatPaginator } from '@angular/material/paginator';
 import { CustomDataSource } from '@models/custom-data-source';
 import { Quiz } from '@models/quiz';
 import { QuizzesDataSource } from '@models/quizzes-data-source';
 import { QuizzesService } from '@services/quizzes.service';
-import { tap } from 'rxjs/operators';
 import { QuizDialogComponent } from '../quiz-dialog/quiz-dialog.component';
+import { Action } from './quiz-list.component';
 
 @Component({
 	selector: 'app-all-quizzes',
-	templateUrl: './all-quizzes.component.html',
-	styleUrls: ['./all-quizzes.component.css']
+	templateUrl: './template.html'
 })
-export class AllQuizzesComponent implements OnInit, AfterViewInit {
+export class AllQuizzesComponent implements OnInit {
 
-	displayedColumns: string[] = ['id', 'title', 'text', 'action'];
+	displayedColumns: string[];
 	dataSource: CustomDataSource<Quiz>;
-	@ViewChild(MatPaginator) paginator: MatPaginator;
+	actions: Action<Quiz>[];
 
 	constructor(
 		private quizzesService: QuizzesService,
 		private dialog: MatDialog
-	) { }
-
-	ngOnInit(): void {
+	) {
+		this.displayedColumns = ['id', 'title', 'text', 'actions'];
 		this.dataSource = new QuizzesDataSource(this.quizzesService);
-		this.dataSource.loadData();
-
+		this.actions = [
+			{
+				title: 'Show',
+				execute: quiz => this.show(quiz)
+			}
+		];
 	}
 
-	ngAfterViewInit() {
+	ngOnInit(): void { }
 
-		this.dataSource.counter
-			.pipe(tap(count => this.paginator.length = count))
-			.subscribe();
-
-		this.paginator.page
-			.subscribe(() => {
-				this.dataSource.loadData(this.paginator.pageIndex);
-			});
-	}
-
-	show(quiz: Quiz) {
+	private show(quiz: Quiz) {
 		this.dialog.open(QuizDialogComponent, { data: quiz });
 	}
 }
