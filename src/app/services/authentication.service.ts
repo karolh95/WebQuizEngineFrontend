@@ -50,7 +50,7 @@ export class AuthenticationService {
 	logout() {
 		localStorage.removeItem('user');
 		this.userSubject.next(null);
-		this.router.navigate(['/login']);
+		this.router.navigate(['/account/login']);
 	}
 
 	private getToken(username: string, password: string): string {
@@ -68,9 +68,13 @@ export class AuthenticationService {
 	}
 }
 
-export interface User {
+export interface Credentials {
 
 	email: string;
 	password: string;
+}
+
+export interface User extends Credentials {
+
 	authData?: string;
 }
