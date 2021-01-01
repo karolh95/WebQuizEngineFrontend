@@ -1,7 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { Quiz } from '@models/quiz';
-import { QuizzesService, Answer } from '@services/quizzes.service';
+import { QuizzesService, Answer, Quiz } from '@services/quizzes.service';
 
 @Component({
 	selector: 'app-quiz-dialog',

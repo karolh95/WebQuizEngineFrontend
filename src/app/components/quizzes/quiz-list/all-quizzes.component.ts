@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { CustomDataSource } from '@models/custom-data-source';
-import { Quiz } from '@models/quiz';
-import { QuizzesService } from '@services/quizzes.service';
+import { QuizzesService, Quiz } from '@services/quizzes.service';
 import { QuizDialogComponent } from '../quiz-dialog/quiz-dialog.component';
 import { Action, Columns } from './quiz-list.component';
 

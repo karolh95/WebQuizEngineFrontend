@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CustomDataSource } from '@models/custom-data-source';
-import { Quiz } from '@models/quiz';
-import { QuizzesService } from '@services/quizzes.service';
+import { QuizzesService, Quiz } from '@services/quizzes.service';
 import { Action, Columns } from './quiz-list.component';
 
 @Component({

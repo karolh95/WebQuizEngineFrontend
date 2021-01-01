@@ -3,8 +3,7 @@ import { Component, OnInit, Optional } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
-import { Quiz } from '@models/quiz';
-import { QuizzesService } from '@services/quizzes.service';
+import { QuizzesService, Quiz } from '@services/quizzes.service';
 import { DialogComponent } from './dialog/dialog.component';
 
 @Component({
@@ -39,13 +38,12 @@ export class CreateQuizComponent implements OnInit {
 	onSubmit() {
 
 		this.errors = [];
-		const quiz: Quiz = new Quiz();
-
-		quiz.title = this.formGroup.controls.title.value;
-		quiz.text = this.formGroup.controls.text.value;
-		quiz.options = [];
-		quiz.answer = [];
-
+		const quiz: Quiz = {
+			title: this.formGroup.controls.title.value,
+			text: this.formGroup.controls.text.value,
+			options: [],
+			answer: []
+		};
 		for (let i = 0; i < this.options.length; i++) {
 			let option = this.options[i];
 			quiz.options.push(option.text);

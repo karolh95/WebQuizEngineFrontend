@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '@env/environment';
-import { Quiz } from '@models/quiz';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -51,6 +50,15 @@ export interface Answer {
 export interface CompletedQuiz {
 	id: number;
 	completedAt: Date;
+}
+
+export interface Quiz {
+
+	id?: number;
+	title: string;
+	text: string;
+	options: string[];
+	answer?: number[];
 }
 
 export interface Page<T> {
