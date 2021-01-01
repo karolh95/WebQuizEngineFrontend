@@ -44,6 +44,11 @@ export class QuizzesService {
 		const params = request;
 		return this.http.get<Page<CompletedQuiz>>(`${this.endpoint}/completed`, { params });
 	}
+
+	deleteQuiz(quiz: Quiz): Observable<Quiz> {
+		const id: number = quiz.id;
+		return this.http.delete<Quiz>(`${this.endpoint}/${id}`);
+	}
 }
 
 export interface Answer {
