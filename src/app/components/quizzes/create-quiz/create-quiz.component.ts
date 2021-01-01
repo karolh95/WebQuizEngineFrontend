@@ -60,7 +60,7 @@ export class CreateQuizComponent implements OnInit {
 			this.errors = e.error.errors;
 		}
 		this.quizzesService
-			.save(quiz)
+			.saveQuiz(quiz)
 			.subscribe(next, error);
 	}
 

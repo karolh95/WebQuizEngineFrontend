@@ -12,31 +12,31 @@ export class QuizzesService {
 		private http: HttpClient
 	) { }
 
-	save(quiz: Quiz): Observable<Quiz> {
+	saveQuiz(quiz: Quiz): Observable<Quiz> {
 		return this.http.post<Quiz>(`${environment.api}/quizzes`, quiz);
 	}
 
-	getById(id: number): Observable<Quiz> {
+	getQuizById(id: number): Observable<Quiz> {
 		return this.http.get<Quiz>(`${environment.api}/quizzes/${id}`);
 	}
 
-	get(request): Observable<Page<Quiz>> {
+	getQuizzes(request): Observable<Page<Quiz>> {
 		const params = request;
 		return this.http.get<Page<Quiz>>(`${environment.api}/quizzes`, { params });
 	}
 
-	getMy(request): Observable<Page<Quiz>> {
+	getMyQuizzes(request): Observable<Page<Quiz>> {
 		const params = request;
 		return this.http.get<Page<Quiz>>(`${environment.api}/quizzes/my`, { params });
 	}
 
-	solve(quiz: Quiz): Observable<Answer> {
+	solveQuiz(quiz: Quiz): Observable<Answer> {
 		const id = quiz.id;
 		const body = { answer: quiz.answer };
 		return this.http.post<Answer>(`${environment.api}/quizzes/${id}/solve`, body);
 	}
 
-	getCompleted(request): Observable<Page<CompletedQuiz>> {
+	getCompletedQuizzes(request): Observable<Page<CompletedQuiz>> {
 		const params = request;
 		return this.http.get<Page<CompletedQuiz>>(`${environment.api}/quizzes/completed`, { params });
 	}

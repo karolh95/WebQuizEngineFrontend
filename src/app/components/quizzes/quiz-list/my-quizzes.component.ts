@@ -17,7 +17,7 @@ export class MyQuizzesComponent implements OnInit {
 		private service: QuizzesService
 	) {
 		this.displayedColumns = [Columns.ID, Columns.TITLE, Columns.TEXT];
-		this.dataSource = new CustomDataSource<Quiz>(request => this.service.getMy(request));
+		this.dataSource = new CustomDataSource<Quiz>(request => this.service.getMyQuizzes(request));
 	}
 
 	ngOnInit(): void { }

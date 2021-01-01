@@ -20,7 +20,7 @@ export class CompletedQuizzesComponent implements OnInit {
 		private dialog: MatDialog
 	) {
 		this.displayedColumns = [Columns.ID, Columns.COMPLETED_AT, Columns.ACTIONS];
-		this.dataSource = new CustomDataSource<CompletedQuiz>(request => quizzesService.getCompleted(request));
+		this.dataSource = new CustomDataSource<CompletedQuiz>(request => quizzesService.getCompletedQuizzes(request));
 		this.actions = [
 			{
 				title: 'Show',
@@ -33,7 +33,7 @@ export class CompletedQuizzesComponent implements OnInit {
 
 	private show(quiz: CompletedQuiz) {
 
-		this.quizzesService.getById(quiz.id).subscribe(
+		this.quizzesService.getQuizById(quiz.id).subscribe(
 			quiz => {
 				this.dialog.open(QuizDialogComponent, { data: quiz });
 			}

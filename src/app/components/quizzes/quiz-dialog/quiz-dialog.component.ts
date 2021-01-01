@@ -33,7 +33,7 @@ export class QuizDialogComponent implements OnInit {
 				this.quiz.answer.push(i);
 			}
 		}
-		this.quizzesService.solve(this.quiz).subscribe(
+		this.quizzesService.solveQuiz(this.quiz).subscribe(
 			(answer: Answer) => {
 				this.feedback = answer.feedback;
 				if (!answer.success) {
