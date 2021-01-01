@@ -6,10 +6,10 @@ import { QuizDialogComponent } from '../quiz-dialog/quiz-dialog.component';
 import { Action, Columns } from './quiz-list.component';
 
 @Component({
-	selector: 'app-solved-quizzes',
+	selector: 'app-completed-quizzes',
 	templateUrl: './template.html'
 })
-export class SolvedQuizzesComponent implements OnInit {
+export class CompletedQuizzesComponent implements OnInit {
 
 	displayedColumns: Columns[];
 	dataSource: CustomDataSource<CompletedQuiz>;
