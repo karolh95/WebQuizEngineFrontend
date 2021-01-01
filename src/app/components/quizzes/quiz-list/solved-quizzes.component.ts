@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { CustomDataSource } from '@models/custom-data-source';
-import { SolvedQuizzesDataSource } from '@models/solved-quizzes-data-source';
 import { CompletedQuiz, QuizzesService } from '@services/quizzes.service';
 import { QuizDialogComponent } from '../quiz-dialog/quiz-dialog.component';
 import { Action, Columns } from './quiz-list.component';
@@ -21,7 +20,7 @@ export class SolvedQuizzesComponent implements OnInit {
 		private dialog: MatDialog
 	) {
 		this.displayedColumns = [Columns.ID, Columns.COMPLETED_AT, Columns.ACTIONS];
-		this.dataSource = new SolvedQuizzesDataSource(this.quizzesService);
+		this.dataSource = new CustomDataSource<CompletedQuiz>(request => quizzesService.getCompleted(request));
 		this.actions = [
 			{
 				title: 'Show',

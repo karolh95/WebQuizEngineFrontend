@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { CustomDataSource } from '@models/custom-data-source';
-import { MyQuizzesDataSource } from '@models/my-quizzes-data-source';
 import { Quiz } from '@models/quiz';
 import { QuizzesService } from '@services/quizzes.service';
 import { Action, Columns } from './quiz-list.component';
@@ -19,7 +18,7 @@ export class MyQuizzesComponent implements OnInit {
 		private service: QuizzesService
 	) {
 		this.displayedColumns = [Columns.ID, Columns.TITLE, Columns.TEXT];
-		this.dataSource = new MyQuizzesDataSource(this.service);
+		this.dataSource = new CustomDataSource<Quiz>(request => this.service.getMy(request));
 	}
 
 	ngOnInit(): void { }
