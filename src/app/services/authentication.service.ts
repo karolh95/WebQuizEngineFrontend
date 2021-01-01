@@ -2,7 +2,6 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { User } from '@models/user';
 import { map } from 'rxjs/operators';
 import { environment } from '@env/environment';
 
@@ -67,4 +66,11 @@ export class AuthenticationService {
 			return user;
 		}
 	}
+}
+
+export interface User {
+
+	email: string;
+	password: string;
+	authData?: string;
 }
