@@ -1,9 +1,10 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit, Optional } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { AbstractControl, FormArray, FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
-import { MatTableDataSource } from '@angular/material/table';
+import { Router } from '@angular/router';
 import { QuizzesService, Quiz } from '@services/quizzes.service';
+import { Observable } from 'rxjs';
 import { DialogComponent } from './dialog/dialog.component';
 
 @Component({
@@ -13,82 +14,102 @@ import { DialogComponent } from './dialog/dialog.component';
 })
 export class CreateQuizComponent implements OnInit {
 
-	displayedColumns: string[] = ['text', 'isCorrect', 'removeButton'];
-	options: Option[];
-	dataSource: MatTableDataSource<Option>;
+	private action: (quiz: Quiz) => Observable<Quiz>;
+	private saveQuiz: (quiz: Quiz) => Observable<Quiz>;
+	private updateQuiz: (quiz: Quiz) => Observable<Quiz>;
+
 	formGroup: FormGroup;
+
+	quiz: Quiz;
 	errors: { defaultMessage: string }[];
+
+	get options(): FormArray {
+		return this.formGroup.controls.options as FormArray;
+	}
 
 	constructor(
 		private builder: FormBuilder,
 		private quizzesService: QuizzesService,
-		private dialog: MatDialog
-	) { }
+		private dialog: MatDialog,
+		private router: Router
+	) {
+		this.saveQuiz = quiz => quizzesService.saveQuiz(quiz);
+		this.updateQuiz = quiz => quizzesService.updateQuiz(quiz);
+
+		const extras = this.router.getCurrentNavigation().extras;
+
+		if (extras.state) {
+			this.quiz = extras.state.data;
+			this.action = this.updateQuiz
+		} else {
+			this.quiz = this.newQuiz();
+			this.action = this.saveQuiz;
+		}
+	}
 
 	ngOnInit(): void {
-
 		this.formGroup = this.builder.group({
-			title: [''],
-			text: [''],
+			title: [this.quiz.title],
+			text: [this.quiz.text],
+			options: this.builder.array([])
 		});
-		this.options = [];
-		this.dataSource = new MatTableDataSource<Option>(this.options);
+		this.quiz.options.forEach(
+			option => this.addOption(option)
+		);
 	}
 
 	onSubmit() {
 
 		this.errors = [];
-		const quiz: Quiz = {
-			title: this.formGroup.controls.title.value,
-			text: this.formGroup.controls.text.value,
-			options: [],
-			answer: []
-		};
-		for (let i = 0; i < this.options.length; i++) {
-			let option = this.options[i];
-			quiz.options.push(option.text);
-			if (option.isCorrect) {
-				quiz.answer.push(i);
+		this.quiz.title = this.formGroup.controls.title.value;
+		this.quiz.text = this.formGroup.controls.text.value;
+
+		const options: string[] = [];
+		const answer: number[] = [];
+		this.options.controls.forEach(
+
+			(group: FormGroup, i: number) => {
+
+				options.push(group.controls.text.value);
+				if (group.controls.answer.value) {
+					answer.push(i);
+				}
 			}
-		}
+		);
+		this.quiz.options = options;
+		this.quiz.answer = answer;
 
 		const next = (quiz: Quiz) => {
 			this.dialog.open(DialogComponent, { data: quiz })
+			this.action = this.saveQuiz;
+			this.quiz = this.newQuiz();
 			this.ngOnInit();
 		};
 		const error = (e: HttpErrorResponse) => {
 			this.errors = e.error.errors;
 		}
-		this.quizzesService
-			.saveQuiz(quiz)
-			.subscribe(next, error);
+
+		this.action(this.quiz).subscribe(next, error);
 	}
 
-	addOption() {
-		this.options.push(new Option());
-		this.refresh();
+	remove(index: number) {
+		this.options.removeAt(index);
 	}
 
-	remove(option: Option) {
-		this.options = this.options.filter(o => o != option);
-		this.refresh();
+	addOption(text: string = '') {
+		this.options.push(
+			this.builder.group({
+				text: [text],
+				answer: false
+			})
+		);
 	}
 
-	refresh() {
-		this.dataSource.data = this.options;
-	}
-}
-
-class Option {
-	text: string;
-	isCorrect: boolean;
-
-	constructor() {
-		this.text = '';
-		this.isCorrect = false;
-	}
-
-	change($event) {
-		this.isCorrect = $event.checked;
+	private newQuiz(): Quiz {
+		return {
+			title: '',
+			text: '',
+			options: []
+		};
 	}
 }

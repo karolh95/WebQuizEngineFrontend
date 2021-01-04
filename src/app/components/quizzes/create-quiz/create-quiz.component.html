@@ -12,53 +12,45 @@
             <input matInput placeholder="Ex. Select only coffee drinks." formControlName="text">
         </mat-form-field>
 
-        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 full-width">
+        <table class="mat-elevation-z8 full-width">
+            <thead>
+                <th>Text</th>
+                <th>Answer</th>
+                <th>Action</th>
+            </thead>
 
-            <ng-container matColumnDef="text">
-                <th mat-header-cell *matHeaderCellDef>Text</th>
-                <td mat-cell *matCellDef="let option">
-                    <mat-form-field class="full-width">
-                        <mat-label>Option text</mat-label>
-                        <input matInput [(ngModel)]="option.text" [ngModelOptions]="{standalone: true}" placeholder="Ex. Cappuccino">
-                    </mat-form-field>
-                </td>
-
-                <ng-container matColumnDef="removeButton">
-                    <th mat-header-cell *matHeaderCellDef class="w-100">Action</th>
-                    <td mat-cell *matCellDef="let option, index">
-                        <button mat-raised-button type="button" color="warn" (click)="remove(option)">
-							Remove
+            <tbody>
+                <ng-container formArrayName="options" *ngFor="let option of this.options.controls; index as i">
+                    <tr [formGroupName]="i">
+                        <td>
+                            <mat-form-field class="full-width">
+                                <mat-label>Option text</mat-label>
+                                <input matInput placeholder="Ex. Cappuccino" formControlName="text">
+                            </mat-form-field>
+                        </td>
+                        <td>
+                            <mat-checkbox formControlName="answer"></mat-checkbox>
+                        </td>
+                        <td>
+                            <button mat-raised-button type="button" color="warn" (click)="remove(i)">
+								Remove
+							</button>
+                    </tr>
+                </ng-container>
+                <tr>
+                    <td>
+                        <button mat-button type="button" (click)="addOption()" color="primary" class="full-width">
+							Add new option
 						</button>
                     </td>
-                </ng-container>
-
-            </ng-container>
-
-            <ng-container matColumnDef="isCorrect">
-                <th mat-header-cell *matHeaderCellDef class="w-100">Answer</th>
-                <td mat-cell *matCellDef="let option">
-                    <mat-checkbox [(ngModel)]="option.isCorrect" [ngModelOptions]="{standalone: true}">
-                    </mat-checkbox>
-                </td>
-            </ng-container>
-
-            <ng-container matColumnDef="addButton">
-                <td mat-footer-cell *matFooterCellDef>
-                    <button mat-button type="button" (click)="addOption()" color="primary" class="full-width">
-						Add new option
-					</button>
-                </td>
-            </ng-container>
-
-            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-            <tr mat-row *matRowDef="let row, columns:displayedColumns"></tr>
-            <tr mat-footer-row *matFooterRowDef="['addButton']"></tr>
+                </tr>
+            </tbody>
 
         </table>
 
         <br>
 
-        <button mat-raised-button color="primary" class="full-width">Create Quiz</button>
+        <button mat-raised-button color="primary" class="full-width">Save Quiz</button>
 
     </form>
 

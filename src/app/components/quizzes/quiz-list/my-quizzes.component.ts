@@ -1,6 +1,7 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 import { CustomDataSource } from '@models/custom-data-source';
 import { QuizzesService, Quiz } from '@services/quizzes.service';
 import { QuizDialogComponent } from '../quiz-dialog/quiz-dialog.component';
@@ -18,7 +19,8 @@ export class MyQuizzesComponent implements OnInit {
 
 	constructor(
 		private service: QuizzesService,
-		private dialog: MatDialog
+		private dialog: MatDialog,
+		private router: Router
 	) {
 		this.displayedColumns = [Columns.ID, Columns.TITLE, Columns.TEXT, Columns.ACTIONS];
 		this.dataSource = new CustomDataSource<Quiz>(request => this.service.getMyQuizzes(request));
@@ -28,6 +30,10 @@ export class MyQuizzesComponent implements OnInit {
 				execute: quiz => this.dialog.open(QuizDialogComponent, { data: quiz })
 			},
 			{
+				title: 'Edit',
+				execute: quiz => this.editQuiz(quiz)
+			},
+			{
 				title: 'Remove',
 				execute: quiz => this.deleteQuiz(quiz)
 			}
@@ -35,6 +41,10 @@ export class MyQuizzesComponent implements OnInit {
 	}
 
 	ngOnInit(): void { }
+
+	private editQuiz(quiz: Quiz) {
+		this.router.navigate(['quizzes/create'], { state: { data: quiz } });
+	}
 
 	private deleteQuiz(quiz: Quiz) {
 		const refresh = () => this.dataSource.loadData();

@@ -20,6 +20,11 @@ export class QuizzesService {
 		return this.http.post<Quiz>(this.endpoint, quiz);
 	}
 
+	updateQuiz(quiz: Quiz): Observable<Quiz> {
+		const id = quiz.id;
+		return this.http.put<Quiz>(`${this.endpoint}/${id}`, quiz);
+	}
+
 	getQuizById(id: number): Observable<Quiz> {
 		return this.http.get<Quiz>(`${this.endpoint}/${id}`);
 	}
