@@ -49,8 +49,9 @@
         </table>
 
         <br>
-
-        <button mat-raised-button color="primary" class="full-width">Save Quiz</button>
+        <mat-progress-bar mode="query" *ngIf="isLoading"></mat-progress-bar>
+        <button mat-raised-button color="primary" class="full-width" [disabled]="isLoading">Save Quiz</button>
+        <button mat-raised-button type="button" color="accent" class="full-width" [disabled]="isLoading" (click)="reset()">New Quiz</button>
 
     </form>
 

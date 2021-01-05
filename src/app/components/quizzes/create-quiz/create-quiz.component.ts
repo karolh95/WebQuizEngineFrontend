@@ -20,6 +20,7 @@ export class CreateQuizComponent implements OnInit {
 
 	quiz: Quiz;
 	errors: { defaultMessage: string }[];
+	isLoading: boolean;
 
 	get options(): FormArray {
 		return this.formGroup.controls.options as FormArray;
@@ -40,6 +41,7 @@ export class CreateQuizComponent implements OnInit {
 			this.quiz = { title: '', text: '', options: [''] };
 			this.action = quiz => quizzesService.saveQuiz(quiz);
 		}
+		this.isLoading = false;
 	}
 
 	ngOnInit(): void {
@@ -55,6 +57,7 @@ export class CreateQuizComponent implements OnInit {
 
 	onSubmit() {
 
+		this.isLoading = true;
 		this.errors = [];
 		this.quiz.title = this.formGroup.controls.title.value;
 		this.quiz.text = this.formGroup.controls.text.value;
@@ -77,9 +80,11 @@ export class CreateQuizComponent implements OnInit {
 		const next = (quiz: Quiz) => {
 			this.dialog.open(DialogComponent, { data: quiz })
 			this.action = quiz => this.quizzesService.updateQuiz(quiz);
+			this.isLoading = false;
 		};
 		const error = (e: HttpErrorResponse) => {
 			this.errors = e.error.errors;
+			this.isLoading = false;
 		}
 
 		this.action(this.quiz).subscribe(next, error);
@@ -99,5 +104,11 @@ export class CreateQuizComponent implements OnInit {
 				answer: false
 			})
 		);
+	}
+
+	reset() {
+		this.quiz = { title: '', text: '', options: [''] };
+		this.action = quiz => this.quizzesService.saveQuiz(quiz);
+		this.ngOnInit();
 	}
 }
