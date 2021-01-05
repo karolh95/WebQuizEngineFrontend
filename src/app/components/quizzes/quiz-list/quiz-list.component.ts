@@ -37,7 +37,7 @@ export class QuizListComponent implements OnInit, AfterViewInit {
 }
 
 export interface Action<T> {
-	title: string;
+	icon: string;
 	execute: (item: T) => void;
 }
 

@@ -26,15 +26,15 @@ export class MyQuizzesComponent implements OnInit {
 		this.dataSource = new CustomDataSource<Quiz>(request => this.service.getMyQuizzes(request));
 		this.actions = [
 			{
-				title: 'Show',
+				icon: 'search',
 				execute: quiz => this.dialog.open(QuizDialogComponent, { data: quiz })
 			},
 			{
-				title: 'Edit',
+				icon: 'create',
 				execute: quiz => this.editQuiz(quiz)
 			},
 			{
-				title: 'Remove',
+				icon: 'delete',
 				execute: quiz => this.deleteQuiz(quiz)
 			}
 		];

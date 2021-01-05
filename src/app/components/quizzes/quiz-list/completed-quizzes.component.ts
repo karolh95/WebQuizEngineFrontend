@@ -23,7 +23,7 @@ export class CompletedQuizzesComponent implements OnInit {
 		this.dataSource = new CustomDataSource<CompletedQuiz>(request => quizzesService.getCompletedQuizzes(request));
 		this.actions = [
 			{
-				title: 'Show',
+				icon: 'search',
 				execute: quiz => this.show(quiz)
 			}
 		];
