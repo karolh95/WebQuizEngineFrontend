@@ -15,8 +15,6 @@ import { DialogComponent } from './dialog/dialog.component';
 export class CreateQuizComponent implements OnInit {
 
 	private action: (quiz: Quiz) => Observable<Quiz>;
-	private saveQuiz: (quiz: Quiz) => Observable<Quiz>;
-	private updateQuiz: (quiz: Quiz) => Observable<Quiz>;
 
 	formGroup: FormGroup;
 
@@ -33,17 +31,14 @@ export class CreateQuizComponent implements OnInit {
 		private dialog: MatDialog,
 		private router: Router
 	) {
-		this.saveQuiz = quiz => quizzesService.saveQuiz(quiz);
-		this.updateQuiz = quiz => quizzesService.updateQuiz(quiz);
-
 		const extras = this.router.getCurrentNavigation().extras;
 
 		if (extras.state) {
 			this.quiz = extras.state.data;
-			this.action = this.updateQuiz
+			this.action = quiz => quizzesService.updateQuiz(quiz);
 		} else {
-			this.quiz = this.newQuiz();
-			this.action = this.saveQuiz;
+			this.quiz = { title: '', text: '', options: [''] };
+			this.action = quiz => quizzesService.saveQuiz(quiz);
 		}
 	}
 
@@ -81,9 +76,7 @@ export class CreateQuizComponent implements OnInit {
 
 		const next = (quiz: Quiz) => {
 			this.dialog.open(DialogComponent, { data: quiz })
-			this.action = this.saveQuiz;
-			this.quiz = this.newQuiz();
-			this.ngOnInit();
+			this.action = quiz => this.quizzesService.updateQuiz(quiz);
 		};
 		const error = (e: HttpErrorResponse) => {
 			this.errors = e.error.errors;
@@ -106,13 +99,5 @@ export class CreateQuizComponent implements OnInit {
 				answer: false
 			})
 		);
-	}
-
-	private newQuiz(): Quiz {
-		return {
-			title: '',
-			text: '',
-			options: ['']
-		};
 	}
 }
