@@ -10,6 +10,8 @@ import { HomeModule } from '@components/home/home.module';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BasicAuthInterceptor } from '@interceptors/basic-auth.interceptor';
 import { ErrorInterceptor } from '@interceptors/error.interceptor';
+import { MatIconModule } from '@angular/material/icon';
+import { MatMenuModule } from '@angular/material/menu';
 
 @NgModule({
 	declarations: [
@@ -22,7 +24,9 @@ import { ErrorInterceptor } from '@interceptors/error.interceptor';
 		HomeModule,
 		MatToolbarModule,
 		MatButtonModule,
-		HttpClientModule
+		HttpClientModule,
+		MatIconModule,
+		MatMenuModule
 	],
 	providers: [
 		{ provide: HTTP_INTERCEPTORS, useClass: BasicAuthInterceptor, multi: true },

@@ -1,36 +1,47 @@
-<mat-toolbar color="primary">
-    <mat-toolbar-row>
-        <span>{{title}}</span>
-    </mat-toolbar-row>
-    <mat-toolbar-row>
+<mat-toolbar color="primary" class="mat-elevation-z8">
 
-        <button mat-flat-button color="primary" [routerLink]="['']">
-			Home
-		</button>
+    <button mat-flat-button color="primary" [routerLink]="['']">Web Quiz</button>
 
-        <ng-container *ngIf="user; then authenticated; else anonymous"></ng-container>
+    <ng-container *ngIf="user; then authenticated; else anonymous"></ng-container>
 
-    </mat-toolbar-row>
 </mat-toolbar>
+
 <router-outlet></router-outlet>
 
-<ng-template #anonymous>
-    <button mat-flat-button color="primary" [routerLink]="['account/login']">
-		Login
-	</button>
-
-    <button mat-flat-button color="primary" [routerLink]="['account/register']">
-		Register
-	</button>
-</ng-template>
-
 <ng-template #authenticated>
-
-    <button mat-flat-button color="primary" [routerLink]="['quizzes']">
-		Quizzes
-	</button>
-
-    <button mat-flat-button color="primary" (click)="logout()">
-		Logout
+    <button mat-button [routerLink]="['quizzes']">Quizzes</button>
+    <span class="fill-remaining-space"></span>
+    <button mat-icon-button [matMenuTriggerFor]="userMenu">
+		<mat-icon>settings</mat-icon>
 	</button>
 </ng-template>
+
+<ng-template #anonymous>
+    <span class="fill-remaining-space"></span>
+    <button mat-icon-button [matMenuTriggerFor]="anonymousMenu">
+		<mat-icon>account_circle</mat-icon>
+	</button>
+</ng-template>
+
+<mat-menu #anonymousMenu>
+    <button mat-menu-item [routerLink]="['account/login']">
+		Login
+		<mat-icon>login</mat-icon>
+	</button>
+    <button mat-menu-item [routerLink]="['account/register']">
+		Register
+		<mat-icon>account_circle</mat-icon>
+	</button>
+</mat-menu>
+
+<mat-menu #userMenu>
+    <ng-template matMenuContent>
+
+        <span mat-menu-item>{{user.email}}</span>
+        <button mat-menu-item (click)="logout()">
+			Logout
+			<mat-icon>logout</mat-icon>
+		</button>
+
+    </ng-template>
+</mat-menu>
