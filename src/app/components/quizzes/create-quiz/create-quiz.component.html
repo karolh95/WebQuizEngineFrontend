@@ -12,7 +12,7 @@
             <input matInput placeholder="Ex. Select only coffee drinks." formControlName="text">
         </mat-form-field>
 
-        <table class="mat-elevation-z8 full-width">
+        <table class="full-width">
             <thead>
                 <th>Text</th>
                 <th>Answer</th>
@@ -32,8 +32,8 @@
                             <mat-checkbox formControlName="answer"></mat-checkbox>
                         </td>
                         <td>
-                            <button mat-raised-button type="button" color="warn" (click)="remove(i)">
-								Remove
+                            <button mat-icon-button type="button" color="warn" (click)="remove(i)">
+								<mat-icon>delete</mat-icon>
 							</button>
                     </tr>
                 </ng-container>
