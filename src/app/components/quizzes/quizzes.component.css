@@ -1,6 +1,4 @@
 :host {
-    display: flex;
-    flex-direction: column;
     height: 100%;
 }
 
@@ -8,10 +6,10 @@ mat-drawer {
     width: fit-content;
 }
 
-mat-drawer-container {
-    height: 100%;
+.full-width {
+    width: 100%;
 }
 
-mat-drawer-content {
-    padding: 20px;
+mat-drawer-container {
+    height: 100%;
 }

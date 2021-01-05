@@ -8,20 +8,20 @@ import { Component, OnInit } from '@angular/core';
 export class QuizzesComponent implements OnInit {
 
 	links: Link[] = [
-		{ title: 'Create Quiz', url: 'create' },
-		{ title: 'All Quizzes', url: 'all' },
-		{ title: 'Completed Quizzes', url: 'completed' },
-		{ title: 'My Quizzes', url: 'my' }
+		{ title: 'Create Quiz', url: 'create', icon: 'add' },
+		{ title: 'All Quizzes', url: 'all', icon: 'list' },
+		{ title: 'Completed Quizzes', url: 'completed', icon: 'done' },
+		{ title: 'My Quizzes', url: 'my', icon: 'dashboard' }
 	];
 
 	constructor() { }
 
-	ngOnInit(): void {
-	}
+	ngOnInit(): void { }
 
 }
 
-class Link {
+interface Link {
 	url: string;
 	title: string;
+	icon: string;
 }

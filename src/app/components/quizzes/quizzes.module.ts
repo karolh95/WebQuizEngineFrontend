@@ -21,6 +21,8 @@ import { CompletedQuizzesComponent } from './quiz-list/completed-quizzes.compone
 import { AllQuizzesComponent } from './quiz-list/all-quizzes.component';
 import { QuizListComponent } from './quiz-list/quiz-list.component';
 import { MyQuizzesComponent } from './quiz-list/my-quizzes.component';
+import { MatIconModule } from '@angular/material/icon';
+import { MatToolbarModule } from '@angular/material/toolbar';
 
 @NgModule({
 	declarations: [
@@ -48,7 +50,9 @@ import { MyQuizzesComponent } from './quiz-list/my-quizzes.component';
 		MatCheckboxModule,
 		MatTableModule,
 		MatDialogModule,
-		MatPaginatorModule
+		MatPaginatorModule,
+		MatIconModule,
+		MatToolbarModule
 	]
 })
 export class QuizzesModule { }
