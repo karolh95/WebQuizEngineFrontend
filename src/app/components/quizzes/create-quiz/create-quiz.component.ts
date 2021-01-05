@@ -94,6 +94,9 @@ export class CreateQuizComponent implements OnInit {
 
 	remove(index: number) {
 		this.options.removeAt(index);
+		if (this.options.length == 0) {
+			this.addOption('');
+		}
 	}
 
 	addOption(text: string = '') {
@@ -109,7 +112,7 @@ export class CreateQuizComponent implements OnInit {
 		return {
 			title: '',
 			text: '',
-			options: []
+			options: ['']
 		};
 	}
 }
