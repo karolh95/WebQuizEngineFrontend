@@ -1,5 +1,6 @@
 import { AfterViewInit, Component, Input, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
+import { MatTable } from '@angular/material/table';
 import { CustomDataSource } from '@models/custom-data-source';
 import { tap } from 'rxjs/operators';
 
@@ -16,10 +17,11 @@ export class QuizListComponent implements OnInit, AfterViewInit {
 	@ViewChild(MatPaginator) paginator: MatPaginator;
 
 	columns = Columns;
-
+	isLoading: boolean;
 	constructor() { }
 
 	ngOnInit(): void {
+		this.dataSource.isLoadingData.subscribe(state => this.isLoading = state);
 		this.dataSource.loadData();
 	}
 
@@ -46,5 +48,6 @@ export enum Columns {
 	TITLE = 'title',
 	TEXT = 'text',
 	COMPLETED_AT = 'completedAt',
-	ACTIONS = 'actions'
+	ACTIONS = 'actions',
+	NO_DATA = 'noData'
 }

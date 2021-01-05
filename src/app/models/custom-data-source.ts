@@ -10,6 +10,7 @@ export class CustomDataSource<T> implements DataSource<T> {
 	private loadingData = new BehaviorSubject<boolean>(false);
 	private count = new BehaviorSubject<number>(0);
 	public counter = this.count.asObservable();
+	public isLoadingData = this.loadingData.asObservable();
 
 	constructor(private dataObserver: ((request) => Observable<Page<T>>)) { }
 

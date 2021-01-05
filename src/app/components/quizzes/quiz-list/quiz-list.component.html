@@ -1,5 +1,5 @@
 <div>
-    <table mat-table [dataSource]="dataSource">
+    <table mat-table [dataSource]="dataSource" #table>
 
         <mat-text-column [name]="columns.ID"></mat-text-column>
         <mat-text-column [name]="columns.TITLE"></mat-text-column>
@@ -25,7 +25,14 @@
 
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row, columns: displayedColumns;"></tr>
-
     </table>
-    <mat-paginator [pageSize]="10"></mat-paginator>
+    <mat-progress-bar *ngIf="isLoading" mode="query"></mat-progress-bar>
+    <table *ngIf="!table._data.length && !isLoading">
+        <tr>
+            <td [attr.colSpan]="displayedColumns.length" style="text-align: center;">
+                No Quizzes found!
+            </td>
+        </tr>
+    </table>
+    <mat-paginator [pageSize]="10" [hidden]="!table._data.length"></mat-paginator>
 </div>

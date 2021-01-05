@@ -23,6 +23,7 @@ import { QuizListComponent } from './quiz-list/quiz-list.component';
 import { MyQuizzesComponent } from './quiz-list/my-quizzes.component';
 import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 @NgModule({
 	declarations: [
@@ -52,7 +53,8 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 		MatDialogModule,
 		MatPaginatorModule,
 		MatIconModule,
-		MatToolbarModule
+		MatToolbarModule,
+		MatProgressBarModule
 	]
 })
 export class QuizzesModule { }
