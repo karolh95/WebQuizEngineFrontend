@@ -22,7 +22,7 @@ export class MyQuizzesComponent implements OnInit {
 		private dialog: MatDialog,
 		private router: Router
 	) {
-		this.displayedColumns = [Columns.ID, Columns.TITLE, Columns.TEXT, Columns.ACTIONS];
+		this.displayedColumns = [Columns.TITLE, Columns.TEXT, Columns.ACTIONS];
 		this.dataSource = new CustomDataSource<Quiz>(request => this.service.getMyQuizzes(request));
 		this.actions = [
 			{

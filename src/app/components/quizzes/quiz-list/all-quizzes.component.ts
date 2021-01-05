@@ -19,7 +19,7 @@ export class AllQuizzesComponent implements OnInit {
 		private quizzesService: QuizzesService,
 		private dialog: MatDialog
 	) {
-		this.displayedColumns = [Columns.ID, Columns.TITLE, Columns.TEXT, Columns.ACTIONS];
+		this.displayedColumns = [Columns.TITLE, Columns.TEXT, Columns.ACTIONS];
 		this.dataSource = new CustomDataSource<Quiz>(request => this.quizzesService.getQuizzes(request));
 		this.actions = [
 			{
