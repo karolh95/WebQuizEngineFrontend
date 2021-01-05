@@ -1,6 +1,5 @@
 import { AfterViewInit, Component, Input, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
-import { MatTable } from '@angular/material/table';
 import { CustomDataSource } from '@models/custom-data-source';
 import { tap } from 'rxjs/operators';
 

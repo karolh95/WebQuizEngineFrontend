@@ -14,6 +14,10 @@ export class CustomDataSource<T> implements DataSource<T> {
 
 	constructor(private dataObserver: ((request) => Observable<Page<T>>)) { }
 
+	empty() {
+		return this.data.value.length == 0;
+	}
+
 	connect(collectionViewer: CollectionViewer): Observable<T[] | readonly T[]> {
 		return this.data.asObservable();
 	}
