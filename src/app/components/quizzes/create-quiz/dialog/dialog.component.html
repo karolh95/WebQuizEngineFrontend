@@ -1,10 +1,8 @@
-<h1 mat-dialog-title>The Quiz has been saved succesfully</h1>
+<h1 mat-dialog-title>The Quiz has been saved successfully</h1>
 <div mat-dialog-content>
-    <p><b>ID:</b> {{quiz.id}}</p>
-    <p><b>Title:</b> {{quiz.title}}</p>
-    <p><b>Text:</b> {{quiz.text}}</p>
-    <p><b>Options:</b> {{quiz.options}}</p>
+    <p>The Quiz '{{quiz.title}}' has been saved successfully!</p>
+    <p>Quiz ID: {{quiz.id}}</p>
 </div>
 <div mat-dialog-actions>
-    <button mat-button mat-dialog-close>Close</button>
+    <button mat-button color="primary" mat-dialog-close>Close</button>
 </div>
