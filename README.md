@@ -2,6 +2,8 @@
 
 A multi-users web service for creating and solving quizzes.
 
+Backend used: [Web Quiz Service](https://github.com/karolh95/WebQuizEngine)
+
 Live demo: [Heroku](https://quizzes-karolh95.herokuapp.com/)
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.1.13.
