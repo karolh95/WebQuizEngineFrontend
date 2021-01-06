@@ -1,4 +1,4 @@
 export const environment = {
-  production: true,
-  api: 'http://localhost:8889'
+	production: true,
+	api: 'https://web-quiz-karolh95.herokuapp.com/api'
 };
