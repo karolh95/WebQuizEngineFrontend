@@ -29,7 +29,31 @@ export class HomeMessagesService {
 			]
 		};
 
-		this.messages = of<Message[]>([LoginRegistrationMessage, WebQuizMessage]);
+		const QuizzesCreationMessage: Message = {
+			title: 'Quizzes Creation',
+			date: new Date("2021-01-03"),
+			text: [
+				'Create, search and solve quizzes - it\'s all possible now!',
+				'Feel free to try it out!'
+			]
+		};
+
+		const OnlineMessage: Message = {
+			title: 'Web Quiz is Online!',
+			date: new Date("2021-01-06"),
+			text: [
+				'Hello, there!',
+				'The Web Quiz is officially released!',
+				'It will be available here on Heroku'
+			]
+		};
+
+		this.messages = of<Message[]>([
+			OnlineMessage,
+			QuizzesCreationMessage,
+			LoginRegistrationMessage,
+			WebQuizMessage
+		]);
 	}
 
 	public getMessages(): Observable<Message[]> {
