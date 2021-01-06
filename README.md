@@ -1,6 +1,28 @@
 # WebQuizEngine
 
+A multi-users web service for creating and solving quizzes.
+
+Live demo: [Heroku](https://quizzes-karolh95.herokuapp.com/)
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.1.13.
+
+## Screenshots
+
+Quizzes added by user
+
+![Quizzes added by user screenshot](images/screenshot_my_quizzes.jpg)
+
+Quizzes menu
+
+![Quizzes menu screenshot](images/screenshot_quizzes_menu.jpg)
+
+Create quiz
+
+![Create quiz screenshot](images/screenshot_create.jpg)
+
+Solve quiz
+
+![Solve quiz screenshot](images/screenshot_solve.jpg)
 
 ## Development server
 
